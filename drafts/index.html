@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Homepage drafts — Kitti Borissza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #12301f;
+      --cream: #f4f1e8;
+      --ink: #14241a;
+      --leaf: #8bd346;
+      --line: rgba(18, 48, 31, 0.16);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "Source Sans 3", "Segoe UI", sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.5;
+    }
+    a { color: inherit; }
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -40px;
+      background: var(--leaf);
+      color: var(--forest);
+      padding: 8px 12px;
+      z-index: 2;
+    }
+    .skip:focus { top: 12px; }
+    .wrap { width: min(880px, calc(100% - 40px)); margin: 0 auto; }
+    header { padding: 28px 0 0; }
+    .wordmark {
+      font-family: Oswald, "Arial Narrow", sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+    h1 {
+      font-family: Oswald, "Arial Narrow", sans-serif;
+      font-weight: 500;
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      line-height: 0.95;
+      letter-spacing: 0.01em;
+      margin: 1.2rem 0 0.6rem;
+    }
+    .lead { max-width: 38rem; margin-top: 0; }
+    .band { margin: 28px 0 8px; height: 88px; overflow: hidden; }
+    .band img { width: 100%; height: 140%; object-fit: cover; object-position: 8% 50%; }
+    ol { list-style: none; margin: 12px 0 48px; padding: 0; display: grid; gap: 14px; }
+    li a {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 44px;
+      padding: 18px 18px 16px;
+      background: #fffefb;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      text-decoration: none;
+    }
+    li a:hover { border-color: var(--forest); }
+    li a:focus-visible { outline: 3px solid var(--forest); outline-offset: 3px; }
+    .name {
+      font-family: Oswald, "Arial Narrow", sans-serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .swatch { width: 2.5rem; height: 0.45rem; background: var(--leaf); margin-bottom: 4px; }
+    footer { padding: 8px 0 40px; color: #2e5a3c; }
+    footer a { color: var(--forest); }
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="wrap">
+    <a class="wordmark" href="#top" id="top">Kitti Borissza</a>
+  </header>
+  <main id="main" class="wrap">
+    <h1>Three homepage drafts.</h1>
+    <p class="lead">Same words, three layouts. Pick a direction. The rest of the site is not built yet. The plan is in <a href="../ROADMAP.md">ROADMAP.md</a>.</p>
+    <div class="band" aria-hidden="true">
+      <img src="../images/linkedin_header.jpg" alt="">
+    </div>
+    <ol>
+      <li>
+        <a href="a/index.html">
+          <span class="swatch" aria-hidden="true"></span>
+          <span class="name">A · Paper</span>
+          <span>Warm paper, the portrait beside the headline, and the woven roots as a band under the words.</span>
+        </a>
+      </li>
+      <li>
+        <a href="b/index.html">
+          <span class="swatch" aria-hidden="true"></span>
+          <span class="name">B · Woven</span>
+          <span>Deep forest, the roots beside the hero text, and the proof set on dark tiles.</span>
+        </a>
+      </li>
+      <li>
+        <a href="c/index.html">
+          <span class="swatch" aria-hidden="true"></span>
+          <span class="name">C · Doors</span>
+          <span>A poster-sized headline, then three equal dark door panels and square paper cards.</span>
+        </a>
+      </li>
+    </ol>
+  </main>
+  <footer class="wrap">
+    <p><a href="../ROADMAP.md">ROADMAP.md</a> · Drafts only · 19 Nov 2026</p>
+  </footer>
+</body>
+</html>
