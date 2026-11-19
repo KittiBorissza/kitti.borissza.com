@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Draft D · Paper and doors — Kitti Borissza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* Draft D: A's paper hero, then C's dark door panels, then square cards on paper. */
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    h1, h2, h3, p { text-wrap: pretty; }
+    h1 { text-wrap: balance; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+    .skip {
+      position: absolute; left: 12px; top: -48px; z-index: 20;
+      background: var(--leaf); color: var(--forest);
+      padding: 10px 14px; font-weight: 600; text-decoration: none;
+    }
+    .skip:focus { top: 12px; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .narrow { max-width: 40rem; }
+    .site-header { position: sticky; top: 0; z-index: 10; background: var(--header-bg); border-bottom: 1px solid var(--line); }
+    .bar { display: flex; align-items: center; gap: 18px; min-height: 72px; position: relative; }
+    .wordmark {
+      margin-right: auto; text-decoration: none;
+      font-family: var(--display); font-weight: 600; font-size: 1.2rem; letter-spacing: 0.01em;
+    }
+    .nav-toggle {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .menu-btn {
+      display: none; align-items: center; justify-content: center;
+      min-width: 44px; min-height: 44px; padding: 0 12px;
+      border: 1px solid var(--line); background: transparent; color: inherit;
+      font: inherit; font-weight: 600; cursor: pointer;
+    }
+    nav { display: flex; align-items: center; gap: 8px 22px; }
+    nav a:not(.button) {
+      display: inline-flex; align-items: center; min-height: 44px; text-decoration: none;
+    }
+    nav a:not(.button):hover { text-decoration: underline; text-underline-offset: 0.2em; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px; padding: 0.65rem 1.05rem;
+      background: var(--leaf); color: var(--forest);
+      font-weight: 600; text-decoration: none; border-radius: var(--btn-radius);
+    }
+    .button:hover { background: var(--leaf-hover); }
+    .meta { margin: 0 0 0.7rem; color: var(--mid); font-weight: 600; letter-spacing: 0.04em; }
+    h1 {
+      margin: 0 0 0.8rem;
+      font-family: var(--display); font-weight: var(--h1-weight);
+      font-size: var(--h1-size); line-height: var(--h1-leading); letter-spacing: var(--h1-track);
+    }
+    h1 em { font-style: normal; }
+    .intro { font-size: 1.2rem; line-height: 1.5; max-width: 40rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 1.4rem; }
+    .down { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+    section { padding: var(--section-pad) 0; }
+    h2 {
+      margin: 0 0 0.75rem;
+      font-family: var(--display); font-weight: var(--h2-weight);
+      font-size: var(--h2-size); line-height: 1.02; letter-spacing: var(--h2-track);
+    }
+    h3 {
+      margin: 0 0 0.55rem;
+      font-family: var(--display); font-weight: 600;
+      font-size: var(--h3-size); line-height: 1.05; letter-spacing: 0.01em;
+    }
+    .eyebrow { margin: 0 0 0.45rem; color: var(--mid); font-weight: 600; font-size: 0.95rem; }
+    .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+    .grid > li { display: flex; min-width: 0; }
+    .card {
+      flex: 1; display: flex; flex-direction: column; min-width: 0;
+      padding: 1.25rem 1.2rem 1.15rem;
+      background: var(--card); color: var(--card-ink);
+      border: var(--card-border); border-radius: var(--radius);
+    }
+    .card p { margin: 0 0 0.8rem; }
+    .card .card-link, .card .tags { margin-top: auto; }
+    .card-link { margin: 0.2rem 0 0; }
+    .card-link a { font-weight: 600; }
+    .where { margin-top: auto; }
+    .where-label { font-weight: 700; }
+    .num {
+      display: inline-block; margin-right: 0.35rem;
+      font-size: 0.78em; letter-spacing: 0.04em;
+    }
+    .dates { color: var(--muted); font-size: 0.98rem; }
+    .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0.4rem 0 0; padding: 0; }
+    .tags li {
+      border: 1px solid var(--chip-line); border-radius: 999px;
+      padding: 0.2rem 0.55rem; font-size: 0.82rem; line-height: 1.3;
+    }
+    .status {
+      align-self: flex-start; margin: 0 0 0.7rem;
+      padding: 0.2rem 0.55rem; border: 1px solid var(--chip-line);
+      font-size: 0.92rem; font-weight: 700;
+    }
+    .doors-grid { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    section, article { scroll-margin-top: 84px; }
+    body { overflow-x: clip; }
+    .placeholder {
+      margin-top: auto; min-height: 168px;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      padding: 16px; background: #d5d1c6; color: #14241a;
+      border: 1px dashed #5c584f; font-weight: 600;
+    }
+    .cause-list { margin: 0 0 1rem; padding-left: 1.2rem; }
+    .cause-list li { margin: 0 0 0.55rem; }
+    .cause-list li::marker { color: var(--mid); }
+    .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0.4rem 0 0; padding: 0; }
+    .chips a {
+      display: inline-flex; align-items: center; min-height: 44px;
+      padding: 0.4rem 0.9rem; border: 1px solid var(--chip-line); border-radius: 999px;
+      text-decoration: none; background: var(--chip-bg);
+    }
+    .chips a:hover { background: var(--chip-hover); color: var(--chip-hover-ink); }
+    .more { margin: 1.25rem 0 0; }
+    .more a { font-weight: 600; }
+    .band { position: relative; height: var(--band-h); overflow: hidden; }
+    .band img { width: 100%; height: 240%; object-fit: cover; object-position: center top; }
+    .motif { position: relative; overflow: hidden; background: var(--forest); color: var(--on-dark); }
+    .motif-bg { position: absolute; inset: 0; overflow: hidden; }
+    .motif-bg img {
+      width: 100%; height: 100%; object-fit: cover; object-position: right top;
+      transform: scale(2.4); transform-origin: right top;
+    }
+    .motif-copy {
+      position: relative; z-index: 1; max-width: 38rem;
+      padding: 2.6rem 1.6rem 2.6rem 0;
+      background: var(--motif-solid);
+    }
+    .motif-copy::before {
+      content: ""; position: absolute; top: 0; bottom: 0; right: 100%;
+      width: 60vw; background: var(--motif-solid);
+    }
+    .motif h2 { color: var(--on-dark); }
+    .motif a { color: var(--on-dark); }
+    .contact .plain { margin-top: 0.8rem; }
+    .site-footer { background: var(--footer-bg); color: var(--footer-ink); padding: 1.6rem 0 2rem; }
+    .site-footer p { margin: 0 0 0.4rem; }
+    .site-footer a { text-decoration: underline; text-underline-offset: 0.18em; }
+    .nowrap { white-space: nowrap; }
+    .motif-line { font-family: var(--display); letter-spacing: 0.01em; }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .menu-btn { display: inline-flex; }
+      nav {
+        display: none; position: absolute; left: 0; right: 0; top: 100%;
+        flex-direction: column; align-items: stretch; gap: 0;
+        padding: 6px 20px 16px; background: var(--header-bg);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-toggle:checked ~ nav { display: flex; }
+      nav a:not(.button) { min-height: 48px; }
+      nav .button { margin: 8px 0 4px; }
+      .nav-toggle:focus-visible + .menu-btn { outline: 3px solid var(--focus); outline-offset: 3px; }
+      .menu-btn .close { display: none; }
+      .nav-toggle:checked + .menu-btn .open { display: none; }
+      .nav-toggle:checked + .menu-btn .close { display: inline; }
+      .band { height: 92px; }
+      .band img {
+        width: 320%; max-width: none; height: auto; object-fit: unset;
+        position: absolute; top: 0; right: 0;
+      }
+      .motif-bg { position: relative; height: 108px; inset: auto; }
+      .motif-bg img {
+        transform: none; width: 320%; max-width: none; height: auto; object-fit: unset;
+        position: absolute; top: 0; right: 0;
+      }
+      .motif-copy { max-width: none; padding-right: 0; }
+      .motif-copy::before { display: none; }
+    }
+    @media (min-width: 901px) {
+      .nav-toggle, .menu-btn { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+
+
+    :root {
+      --forest: #12301f; --mid: #2e5a3c; --cream: #f3f0e6; --ink: #14241a;
+      --leaf: #8bd346; --leaf-hover: #9adf58; --card: #fffdf8;
+      --card-ink: #14241a; --muted: #2e5a3c; --on-dark: #f4f1e8;
+      --line: rgba(18, 48, 31, 0.16); --chip-line: #12301f;
+      --chip-bg: transparent; --chip-hover: #12301f; --chip-hover-ink: #f4f1e8;
+      --header-bg: #f3f0e6; --footer-bg: #12301f; --footer-ink: #f4f1e8;
+      --motif-solid: #12301f;
+      --focus: #12301f; --radius: 0px; --btn-radius: 6px; --gap: 12px;
+      --card-border: 2px solid #12301f;
+      --display: "Oswald", "Arial Narrow", sans-serif;
+      --body: "Source Sans 3", "Segoe UI", sans-serif;
+      --h1-size: clamp(2.7rem, 5vw, 4.5rem); --h1-weight: 500; --h1-leading: 0.96; --h1-track: 0.005em;
+      --h2-size: clamp(2rem, 3vw, 2.7rem); --h2-weight: 500; --h2-track: 0.01em;
+      --h3-size: 1.7rem; --section-pad: 3.6rem 0; --band-h: 132px; --band-pos: center top;
+    }
+    body { background: var(--cream); color: var(--ink); font-family: var(--body); font-size: 1.125rem; line-height: 1.55; }
+    h1 em { background: var(--leaf); color: var(--forest); padding: 0 0.12em; }
+    .hero { padding-top: 2.2rem; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.78fr); gap: 42px; align-items: center; }
+    .portrait { margin: 0; }
+    .portrait .crop { display: block; aspect-ratio: 4 / 5; max-height: 540px; overflow: hidden; border-radius: 14px; }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 100% 42%; transform: scale(1.14); transform-origin: 100% 40%; }
+    .portrait figcaption { margin-top: 0.45rem; color: var(--mid); font-size: 0.95rem; }
+    .band { margin-top: 2.4rem; }
+    .doors { padding-top: 1.5rem; }
+    .doors-grid { width: min(1440px, 100%); margin: 0 auto; padding: 0 8px; }
+    .doors .grid { gap: 8px; }
+    .doors .card {
+      background: #12301f; color: #f4f1e8; border: 0; border-radius: 0;
+      padding: 1.5rem 1.3rem 1.25rem;
+    }
+    .doors h3 { font-size: clamp(2rem, 2.5vw, 2.65rem); line-height: 0.95; }
+    .doors .num { color: #f4f1e8; margin-right: 0.35rem; }
+    .doors .where-label { color: #f4f1e8; }
+    .doors .card-link a { color: var(--leaf); }
+    .featured h2, .now h2, .browse h2 { margin-bottom: 1rem; }
+    .featured .card, .now .card { background: #fffdf8; }
+    .causes { background: #fffdf8; border-top: 2px solid #12301f; border-bottom: 2px solid #12301f; }
+    .status, .tags li, .chips a { border-radius: 0; }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 22px; }
+      .portrait { order: 2; max-width: 280px; }
+      .hero-copy { order: 1; }
+      .doors-grid { padding: 0 8px; }
+    }
+
+  </style>
+</head>
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="bar wrap">
+      <a class="wordmark" href="#top">Kitti Borissza</a>
+      <input class="nav-toggle" id="nav-toggle" type="checkbox">
+      <label class="menu-btn" for="nav-toggle"><span class="open">Menu</span><span class="close">Close</span></label>
+      <nav aria-label="Primary">
+        <a href="#featured">Work</a>
+        <!-- Draft only: About and Work together are not built yet. -->
+        <a href="../index.html">About</a>
+        <a href="../index.html">Work together</a>
+        <a class="button" href="mailto:kitti@borissza.com?subject=Hello%20from%20kitti.borissza.com">Tell me about your project</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="meta">Hungary · remote and in person</p>
+          <h1>I help people on a <em>mission</em> bring others along.</h1>
+          <p class="intro">Bitcoin comes first for me, then environmental campaigns and tech for good. I'm Kitti Borissza, and for 15+ years I've built communities, communications and programmes for people trying to change something.</p>
+          <p class="hero-actions">
+            <a class="button" href="mailto:kitti@borissza.com?subject=Hello%20from%20kitti.borissza.com">Tell me about your project</a>
+            <a class="down" href="#featured">See the work ↓</a>
+          </p>
+        </div>
+        <figure class="portrait">
+          <span class="crop"><img src="../../images/Portre-06_Borissza_Kitti.jpg" width="2400" height="1602" alt="Kitti Borissza smiling at a desk."></span>
+          <figcaption>Photo: Németh András Péter</figcaption>
+        </figure>
+      </div>
+      <div class="band" aria-hidden="true">
+        <img src="../../images/linkedin_header.jpg" alt="">
+      </div>
+    </section>
+    <section class="doors" aria-labelledby="doors-title">
+      <div class="wrap">
+        <h2 id="doors-title">Three kinds of work, one approach</h2>
+      </div>
+      <div class="doors-grid">
+        <ul class="grid">
+        <li>
+          <article class="card">
+            <h3><span class="num">1</span> Bring people together</h3>
+            <p>Programmes, hackathons, cohorts and live sessions I've designed, co-hosted and facilitated, where people learn from each other and build together.</p>
+            <p class="where"><span class="where-label">Where I've done it:</span> WAC / We Are Museums · POW Lab · Data Café · Compass Data Stage · Hacker Paradise</p>
+            <p class="card-link"><a href="#work-wac" aria-label="See the work: WAC / We Are Museums">See the work →</a></p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <h3><span class="num">2</span> Tell the story</h3>
+            <p>Communications strategy and hands-on social media, content, online communities and campaigns, across my whole career, for launches and for causes.</p>
+            <p class="where"><span class="where-label">Where I've done it:</span> agency brand communities · startup launches · campaigns for Greenpeace, Artemisszió and Tilos · a Tezos developer Discord · Circles Entropy's go-to-market</p>
+            <p class="card-link"><a href="#work-climate" aria-label="See the work: Climate Game On">See the work →</a></p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <h3><span class="num">3</span> Get it organised</h3>
+            <p>Complex topics turned into plans with resources, timelines and next steps, then delivered: tested, measured and adjusted as we go.</p>
+            <p class="where"><span class="where-label">Where I've done it:</span> the EasyA × Tezos hackathon · Climate Game On's product development · TomorrowPeople's experiment cycles</p>
+            <p class="card-link"><a href="#work-easya" aria-label="See the work: EasyA × Tezos Hackathon">See the work →</a></p>
+          </article>
+        </li>
+        </ul>
+      </div>
+    </section>
+    <section class="featured" id="featured" aria-labelledby="featured-title">
+      <div class="wrap">
+        <h2 id="featured-title">Featured work</h2>
+        <p class="intro">Three projects, one for each kind of work. Each was a team effort, so each story says what the team did and what I did.</p>
+        <ul class="grid">
+        <li>
+          <article class="card" id="work-wac">
+            <p class="eyebrow">1 Bring people together</p>
+            <h3>WAC / We Are Museums</h3>
+            <p class="dates">2022 – 2024</p>
+            <p>Helping museums learn blockchain by building with it, across three seasons of calls, a hackathon and two Factory cohorts.</p>
+            <ul class="tags"><li>Community & ecosystems</li><li>Programmes & projects</li><li>Events & facilitation</li></ul>
+          </article>
+        </li>
+        <li>
+          <article class="card" id="work-climate">
+            <p class="eyebrow">2 Tell the story</p>
+            <h3>Climate Game On</h3>
+            <p class="dates">Jan 2018 – May 2021</p>
+            <p>Turned a vague climate-data idea into a team, a competition win and a shipped app built with eight NGO partners.</p>
+            <ul class="tags"><li>Innovation & product</li><li>Programmes & projects</li><li>Communications & social media</li></ul>
+          </article>
+        </li>
+        <li>
+          <article class="card" id="work-easya">
+            <p class="eyebrow">3 Get it organised</p>
+            <h3>EasyA × Tezos Hackathon, London</h3>
+            <p class="dates">26–27 Nov 2022</p>
+            <p>A 36-hour hackathon in London with two organisations, many moving parts and one person keeping them connected on the Tezos side.</p>
+            <ul class="tags"><li>Programmes & projects</li><li>Events & facilitation</li><li>Community & ecosystems</li></ul>
+          </article>
+        </li>
+        </ul>
+        <p class="more"><a href="#browse">See all work →</a></p>
+      </div>
+    </section>
+    <section class="causes" aria-labelledby="causes-title">
+      <div class="wrap">
+        <p class="eyebrow">Tell the story</p>
+        <h2 id="causes-title">Campaigns for causes</h2>
+        <p class="intro">Communications and fundraising campaigns for organisations I believe in. This is the work I care about most: petitions, fundraising and digital campaigns for environmental and social causes.</p>
+        <ul class="cause-list">
+          <li>Greenpeace Hungary: the Tiszta Adriát petition campaign as a freelance supplier (2015), and a 1% Facebook campaign (2016).</li>
+          <li>Artemisszió Foundation: fundraising and digital communications (2015–16). I also volunteered in its migrant integration programme.</li>
+          <li>Tilos Rádió: a Facebook 1% campaign (2014).</li>
+        </ul>
+        <p>My part was campaign setup, copy, optimisation and reporting, working with each organisation's own staff. Tiszta Adriát ended in 2016 with a win that stopped oil drilling off Croatia's Adriatic coast. That win belongs to Greenpeace and the wider campaign. My part was the petition work.</p>
+        <p class="card-link"><a href="mailto:kitti@borissza.com?subject=Hello%20from%20kitti.borissza.com">Working on a cause? Tell me about it →</a></p>
+        <p class="card-link"><a href="https://www.greenpeace.org/hungary/rolunk/tortenetunk-es-sikereink/" target="_blank" rel="noopener noreferrer">Greenpeace Hungary's history →<span class="sr-only"> (opens in a new tab)</span></a></p>
+      </div>
+    </section>
+    <section class="now" aria-labelledby="now-title">
+      <div class="wrap">
+        <p class="eyebrow">Bring people together</p>
+        <h2 id="now-title">Now</h2>
+        <ul class="grid">
+          <li>
+            <article class="card">
+              <p class="status">Now</p>
+              <h3>POW Lab Builder Calls · Bitvocation</h3>
+              <p class="dates">Lead facilitator · Three-call pilot, Oct – Dec 2026</p>
+              <p>Peer calls that help early-stage Bitcoin builders make progress, stay accountable and support each other.</p>
+              <p class="card-link"><a href="https://blog.bitvocation.com/p/pow-lab-bitcoin-builder-community" target="_blank" rel="noopener noreferrer">Inside the POW Lab →<span class="sr-only"> (opens in a new tab)</span></a></p>
+            </article>
+          </li>
+          <li>
+            <article class="card">
+              <p class="status">Now</p>
+              <h3>Data Café · with Data Science Klub</h3>
+              <p class="dates">Initiator &amp; host · Ongoing since the October 2026 online pilot</p>
+              <p>A peer-learning format where data people learn from each other instead of listening to one speaker. Data Science Klub hosts the community. Next: Data Café ÉLŐ, Budapest, 25 Nov 2026; online in December; a longer in-person session in January 2027.</p>
+              <p class="card-link"><a href="https://dataklub.hu/naptar/" target="_blank" rel="noopener noreferrer">Data Science Klub calendar →<span class="sr-only"> (opens in a new tab)</span></a></p>
+            </article>
+          </li>
+          <li>
+            <article class="card">
+              <p class="status">Recently</p>
+              <h3>Compass AI &amp; Tech Summit 2026</h3>
+              <p class="dates">Host of the Data Stage · October 2026</p>
+              <p>I was MC on the English-language Data Stage at a two-day AI and tech conference. I wrote the speaker intros and briefed the speakers. The Compass team built the programme.</p>
+              <div class="placeholder" role="img" aria-label="Placeholder for the Compass Data Stage photo, not yet added.">
+                <span>Compass Data Stage photo to be added</span>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="browse" id="browse" aria-labelledby="browse-title">
+      <div class="wrap">
+        <h2 id="browse-title">Browse the work</h2>
+        <ul class="chips">
+          <li><a href="#browse">Communications & social media</a></li>
+          <li><a href="#browse">Community & ecosystems</a></li>
+          <li><a href="#browse">Programmes & projects</a></li>
+          <li><a href="#browse">Events & facilitation</a></li>
+          <li><a href="#browse">Innovation & product</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="motif " aria-labelledby="motif-title">
+      <div class="motif-bg" aria-hidden="true">
+        <img src="../../images/linkedin_header.jpg" alt="">
+      </div>
+      <div class="wrap motif-copy">
+        <h2 id="motif-title">Who we build with shapes what we build.</h2>
+        <p><a href="https://www.linkedin.com/in/kittiborissza/" target="_blank" rel="noopener noreferrer">Read the recommendations from Balázs Karafiáth and Zoltán Poczai on <span class="nowrap">LinkedIn →</span><span class="sr-only"> (opens in a new tab)</span></a></p>
+      </div>
+    </section>
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap narrow">
+        <h2 id="contact-title">Working on something other people need to understand, join or support?</h2>
+        <p>Tell me where it stands, even if it's messy. That's usually the best place to start.</p>
+        <p><a class="button" href="mailto:kitti@borissza.com?subject=Hello%20from%20kitti.borissza.com">Tell me about your project</a></p>
+        <p class="plain">Or write to <a href="mailto:kitti@borissza.com?subject=Hello%20from%20kitti.borissza.com">kitti@borissza.com</a> · <a href="https://www.linkedin.com/in/kittiborissza/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><a href="#top">Kitti Borissza</a> · Hungary · remote and in person · <a href="mailto:kitti@borissza.com?subject=Hello%20from%20kitti.borissza.com">kitti@borissza.com</a> · <a href="https://www.linkedin.com/in/kittiborissza/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></p>
+      <p class="motif-line">Who we build with shapes what we build.</p>
+    </div>
+  </footer>
+</body>
+</html>

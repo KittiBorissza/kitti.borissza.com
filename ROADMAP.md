@@ -6,11 +6,11 @@ Written 19 Nov 2026. This file is the place to resume. The site is a personal po
 
 1. Find the first phase below that is not **Done**, and do the next unchecked task.
 2. The approved brief is not in this repo. It lives in Kitti's Google Drive as the PO_Brief doc. Use that for structure and for any wording. Public page copy is Appendix A of the brief. Do not add claims, numbers, clients, or testimonials that are not in that copy.
-3. Homepage directions are in [drafts/](drafts/index.html). Do not rebuild them unless Kitti asks for a change. Wait for her choice (Phase 2) before building the real pages.
+3. Homepage directions are in [drafts/](drafts/index.html). Draft D is the proposed hybrid of A and C, pending Kitti's sign-off. Do not build the real pages until she signs off.
 4. Images already in the repo: `images/Portre-06_Borissza_Kitti.jpg` (credit: Photo: Németh András Péter) and `images/linkedin_header.jpg` (her woven roots-and-leaves artwork, decorative). The Compass stage photo and the Hacker Paradise photo are not in the repo. Use a labelled placeholder until Phase 6 clears them.
 5. Update the status of any phase you work on before stopping, including when a run ends early.
 
-**You are here:** Phase 1 is done. Next is Phase 2 (Kitti picks a direction).
+**You are here:** Draft D is the proposed direction, pending Kitti's sign-off. Next is that sign-off (Phase 2), then the build.
 
 ---
 
@@ -32,18 +32,20 @@ Written 19 Nov 2026. This file is the place to resume. The site is a personal po
 - [x] `drafts/index.html` with a one-line description of each
 - [x] Same approved copy and section order in each draft; different layout
 - [x] Desktop (1440) and mobile (390) screenshots for review, attached to the pull request, not stored in the repo
+- [x] `drafts/d/`: hybrid of A (paper hero, portrait, woven band, main CTA) and C (three dark door panels, then square cards on the paper). Proposed direction, pending Kitti's sign-off
 
-**Definition of done:** Kitti can open the three drafts and compare them. The rest of the site is not built. Met.
+**Definition of done:** Kitti can open the drafts and compare them. Draft D is the proposed direction, pending her sign-off. The rest of the site is not built. Met.
 
 ## Phase 2 — Kitti picks a direction
 
-**Status:** Not started
+**Status:** In progress. She likes A and C and approved a hybrid. Draft D is that hybrid, pending her sign-off.
 
-- [ ] Review drafts A, B, and C on a desktop and a phone
-- [ ] Choose one direction, or name the parts to combine
+- [x] Review drafts A, B, and C on a desktop and a phone
+- [x] Choose one direction, or name the parts to combine: A’s top, C’s three door panels, square cards on the paper below
+- [ ] Kitti signs off on draft D
 - [ ] Note any copy changes or crop changes before build
 
-**Definition of done:** A written choice of direction, including any mix of parts, so the build does not have to guess.
+**Definition of done:** A written choice of direction, including any mix of parts, so the build does not have to guess. Sign-off on D meets this.
 
 ## Phase 3 — Tech setup
 
