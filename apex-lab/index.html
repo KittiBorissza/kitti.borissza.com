@@ -55,11 +55,15 @@
   .portfolio { margin-top: 20px; color: var(--muted); font-size: 15px; }
   footer { margin-top: 64px; padding-top: 24px; padding-bottom: 64px; }
   footer p { border-top: 1px solid var(--rule); padding-top: 24px; color: var(--muted); font-size: 15px; }
+  .compact { margin-top: 40px; padding-top: 24px; font-size: 15px; line-height: 1.55; }
+  .compact h2 { font-size: 16px; margin-bottom: 12px; }
+  .compact li { padding: 7px 0; }
   @media (max-width: 520px) {
     body { font-size: 16px; }
     header { padding-top: 48px; }
     h1 { font-size: 26px; }
     section { margin-top: 48px; }
+    .compact { margin-top: 32px; font-size: 15px; }
     .steps div { grid-template-columns: 1fr; gap: 4px; }
     .steps dt { padding-top: 0; }
     .split { grid-template-columns: 1fr; gap: 24px; }
@@ -94,26 +98,36 @@
     <p class="portfolio">London was one of seven hackathons I worked on at TZ Connect, with roughly 3,000 participants across them.</p>
   </section>
 
-  <section aria-labelledby="social">
-    <h2 id="social">Social media</h2>
+  <section aria-labelledby="social" class="compact">
+    <h2 id="social">B2B marketing and social media</h2>
     <ul>
-      <li><span class="label">Karmamedia, Senior Community Manager.</span> I led a team running community and content for large international consumer brands: editorial planning, content production, paid social and analytics.</li>
-      <li><span class="label">Climate Game On, Co-founder &amp; Product Owner.</span> On this EU-funded campaign across eight countries I led strategy, creative and two campaign videos, and came up with #ClimateGameOn. Our agency partner ran day-to-day social. The hashtag reached 22.48 million people, and the channels logged 3 million+ video views.</li>
       <li><span class="label">B2B tech.</span> I led Dmlab’s rebrand and handled strategy and measurement for the Dmlab/KÜRT Academy course recruitment campaign.</li>
+      <li><span class="label">Climate Game On, Co-founder &amp; Product Owner.</span> On this EU-funded campaign across eight countries I led strategy and creative and came up with #ClimateGameOn. Our agency partner ran day-to-day social. The hashtag reached 22.48 million people, and the channels logged 3 million+ video views.</li>
+      <li><span class="label">Earlier agency work.</span> Senior Community Manager at Karmamedia and Digital Strategist at priSMa, running community, content and paid social for consumer brands.</li>
     </ul>
   </section>
 
-  <section aria-labelledby="pipeline">
+  <section aria-labelledby="events" class="compact">
+    <h2 id="events">European tech events, in person</h2>
+    <ul>
+      <li><span class="label">For Tezos.</span> Web Summit, Lisbon · ETH Paris · Paris Blockchain Week · WeAreDevelopers, Berlin (on the stand, 2022) · despace, Berlin (workshops, exhibitions, hackathon programming, 2022).</li>
+      <li><span class="label">For startups.</span> Pioneers, Vienna, twice: once for Beachegg, once for Servo Movement · CeBIT, Hannover, for Beachegg · Prague Blockchain Week, for Circles Entropy.</li>
+      <li><span class="label">Host.</span> Compass AI &amp; Tech Summit, Budapest, 2026, English-language Data Stage · TEDxDanubia, Budapest, Conversations table host, 2018.</li>
+      <li><span class="label">Attended.</span> Berlin Blockchain Week · Non Fungible Conference, Lisbon.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="pipeline" class="compact">
     <h2 id="pipeline">Events that feed the pipeline</h2>
     <p>At Circles Entropy I logged leads in the CRM and handled the follow-up after events. At Apex Lab I’d pick events by the buyers and partners we want to meet, log next steps in the CRM, and track the qualified meetings and opportunities that reach the pipeline.</p>
   </section>
 
-  <section aria-labelledby="ai">
+  <section aria-labelledby="ai" class="compact">
     <h2 id="ai">AI in my daily work</h2>
     <p>I use AI to turn research notes into briefs, draft copy variants that I then edit and test, and prototype small tools. One example is <a href="https://kittiborissza.github.io/the-patient-funnel/">The Patient Funnel</a>, an interactive marketing proposal with a paid social test planner and budget scenarios.</p>
   </section>
 
-  <section aria-labelledby="why">
+  <section aria-labelledby="why" class="compact">
     <h2 id="why">Why Apex Lab</h2>
     <p>I do my best work in small remote teams where everyone shapes the plan. I co-founded SocialFokus and co-created SummerOffice, a summer co-living space that brought together about 100 people from five continents. That’s where I learned to practise participatory leadership. At Hacker Paradise I facilitated a travelling remote-work community, so a fully remote team that meets in person a few times a year feels natural to me.</p>
   </section>
